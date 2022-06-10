@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sutanrrier.udemyprojeto2.domain.User;
+import com.sutanrrier.udemyprojeto2.dto.UserDTO;
 import com.sutanrrier.udemyprojeto2.repositories.UserRepository;
 import com.sutanrrier.udemyprojeto2.services.exceptions.ObjectNotFoundException;
 
@@ -28,4 +29,11 @@ public class UserService {
 		return user.get();
 	}
 	
+	public User insert(User obj) {
+		return repository.insert(obj);
+	}
+	
+	public User fromDTO(UserDTO objDto) {
+		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
+	}
 }
