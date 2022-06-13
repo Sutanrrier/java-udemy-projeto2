@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sutanrrier.udemyprojeto2.domain.Post;
 import com.sutanrrier.udemyprojeto2.domain.User;
 import com.sutanrrier.udemyprojeto2.dto.UserDTO;
 import com.sutanrrier.udemyprojeto2.services.UserService;
@@ -59,5 +60,11 @@ public class UserResource {
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.status(HttpStatus.OK).body("Usuário atualizado com sucesso!");
+	}
+	
+	@GetMapping(value="/{id}/posts")
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+		User user = service.findById(id);
+		return ResponseEntity.ok().body(user.getPosts());
 	}
 }
