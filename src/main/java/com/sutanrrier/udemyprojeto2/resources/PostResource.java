@@ -15,23 +15,23 @@ import com.sutanrrier.udemyprojeto2.resources.util.URL;
 import com.sutanrrier.udemyprojeto2.services.PostService;
 
 @RestController
-@RequestMapping(value="/posts")
+@RequestMapping(value = "/posts")
 public class PostResource {
 
 	@Autowired
 	PostService service;
-	
-	@GetMapping(value="/{id}")
-	public ResponseEntity<Post> findById(@PathVariable String id){
+
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Post> findById(@PathVariable String id) {
 		Post post = service.findById(id);
 		return ResponseEntity.ok().body(post);
 	}
-	
-	@GetMapping(value="/titleSearch")
-	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value="text", defaultValue="") String text){
+
+	@GetMapping(value = "/titleSearch")
+	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text) {
 		text = URL.decodeParam(text);
 		List<Post> list = service.findByTitle(text);
-		
+
 		return ResponseEntity.ok().body(list);
 	}
 }
